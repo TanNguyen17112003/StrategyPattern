@@ -1,5 +1,4 @@
 package DiscountStrategy;
 
-public class IDS {
-    
+public interface IDS {
 }

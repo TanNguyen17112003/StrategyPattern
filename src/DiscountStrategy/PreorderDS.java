@@ -1,5 +1,4 @@
 package DiscountStrategy;
 
-public class PreorderDS {
-    
+public class PreorderDS implements IDS{
 }

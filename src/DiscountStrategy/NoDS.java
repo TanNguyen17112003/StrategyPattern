@@ -1,5 +1,4 @@
 package DiscountStrategy;
 
-public class NoDS {
-    
+public class NoDS implements IDS{
 }

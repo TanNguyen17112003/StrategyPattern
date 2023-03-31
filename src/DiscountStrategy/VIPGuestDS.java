@@ -1,5 +1,4 @@
 package DiscountStrategy;
 
-public class VIPGuestDS {
-    
+public class VIPGuestDS implements IDS{
 }

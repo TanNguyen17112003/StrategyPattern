@@ -1,5 +1,4 @@
 package DiscountStrategy;
 
-public class CharacterDS {
-    
+public class CharacterDS implements IDS{
 }
