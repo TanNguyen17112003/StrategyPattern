@@ -20,7 +20,7 @@ public class Ticket{
     public String getName(){
         return this.name;
     }
-    public void setPrice(double Price){
+    public void setPrice(double price){
         this.price=price;
     }
     public double getPrice(){
