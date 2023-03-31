@@ -1,5 +1,7 @@
 package PaymentStrategy;
 
-public class PaypalPS {
-    
+public class PaypalPS implements IPS{
+    public void pay(double amount) {
+		
+	}
 }

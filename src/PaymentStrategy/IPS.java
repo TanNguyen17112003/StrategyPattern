@@ -1,5 +1,5 @@
 package PaymentStrategy;
 
-public class IPS {
-    
+public interface IPS {
+    void pay(double amount);
 }
