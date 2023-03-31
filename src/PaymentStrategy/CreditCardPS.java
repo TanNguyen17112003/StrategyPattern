@@ -23,6 +23,6 @@ public class CreditCardPS implements IPS{
         return this.phone;
     }
     public void pay(double amount) {
-		System.out.println(amount*0.1 + " is paid by using CreditCard.");
+		System.out.println(amount-amount*0.1 + " is paid by using CreditCard.");
 	}
 }
