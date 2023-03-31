@@ -28,6 +28,7 @@ public class Ticket{
     }
     public void setDiscountStrategy(IDS discountStrategy){
         this.discountStrategy=discountStrategy;
+        price = discountStrategy.doDiscountPrice(price);
     }
     public IDS getDiscountStrategy(){
         return this.discountStrategy;
