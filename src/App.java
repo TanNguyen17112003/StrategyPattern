@@ -7,7 +7,7 @@ public class App {
         movieList.add(new Movie("Avatar: The Way of Water", 2, new Ticket(125000), null));
         movieList.add(new Movie("Titanic", 3, new Ticket(95000), null));
 
-        String basePath = System.getProperty("user.dir") + "/src/";
+        String basePath = System.getProperty("user.dir") + "/src/images/";
         String path1 = basePath + "avenger.png";
         String path2 = basePath + "avatar.png";
         String path3 = basePath + "titanic.png";

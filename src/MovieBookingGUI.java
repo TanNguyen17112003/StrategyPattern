@@ -407,7 +407,7 @@ public class MovieBookingGUI extends JFrame {
                 SpringLayout.EAST, paymentRadioButtonList.get(1));
 
         JPanel billPanel = new JPanel(new GridLayout(4, 2, 200, 20));
-        billPanel.setPreferredSize(new Dimension(480, 180));
+        billPanel.setPreferredSize(new Dimension(650, 180));
         Border billBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         TitledBorder billTitleBorder = BorderFactory.createTitledBorder(billBorder, "Your Bill",
                 TitledBorder.CENTER, TitledBorder.TOP, fontLabel);
@@ -425,16 +425,25 @@ public class MovieBookingGUI extends JFrame {
 
         ArrayList<JLabel> discountLabelList = new ArrayList<>(2);
         ArrayList<JLabel> discountFieldList = new ArrayList<>(2);
-        for (int i = 0; i < 2; i++) {
-            JLabel discountLabel = new JLabel("Discount for: ");
-            discountLabel.setFont(fontLabel);
-            billPanel.add(discountLabel);
-            discountLabelList.add(discountLabel);
-            JLabel discountField = new JLabel("0");
-            discountField.setFont(fontField);
-            billPanel.add(discountField);
-            discountFieldList.add(discountField);
-        }
+        // Discount for character
+        JLabel discountLabel = new JLabel("Discount for Character Type: ");
+        discountLabel.setFont(fontLabel);
+        billPanel.add(discountLabel);
+        discountLabelList.add(discountLabel);
+        JLabel discountField = new JLabel("0");
+        discountField.setFont(fontField);
+        billPanel.add(discountField);
+        discountFieldList.add(discountField);
+        // Discount or enlows for payment
+        JLabel discountLabel1 = new JLabel("Discount for Payment Type: ");
+        discountLabel1.setFont(fontLabel);
+        billPanel.add(discountLabel1);
+        discountLabelList.add(discountLabel1);
+        JLabel discountField1 = new JLabel("0");
+        discountField1.setFont(fontField);
+        billPanel.add(discountField1);
+        discountFieldList.add(discountField1);
+
         JLabel totalLabel = new JLabel("Total: ");
         totalLabel.setFont(fontLabel);
         billPanel.add(totalLabel);
