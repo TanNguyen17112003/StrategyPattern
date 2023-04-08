@@ -407,7 +407,7 @@ public class MovieBookingGUI extends JFrame {
                 SpringLayout.EAST, paymentRadioButtonList.get(1));
 
         JPanel billPanel = new JPanel(new GridLayout(4, 2, 200, 20));
-        billPanel.setPreferredSize(new Dimension(650, 180));
+        billPanel.setPreferredSize(new Dimension(700, 180));
         Border billBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         TitledBorder billTitleBorder = BorderFactory.createTitledBorder(billBorder, "Your Bill",
                 TitledBorder.CENTER, TitledBorder.TOP, fontLabel);
@@ -426,7 +426,7 @@ public class MovieBookingGUI extends JFrame {
         ArrayList<JLabel> discountLabelList = new ArrayList<>(2);
         ArrayList<JLabel> discountFieldList = new ArrayList<>(2);
         // Discount for character
-        JLabel discountLabel = new JLabel("Discount for Character Type: ");
+        JLabel discountLabel = new JLabel("Discount for Character: ");
         discountLabel.setFont(fontLabel);
         billPanel.add(discountLabel);
         discountLabelList.add(discountLabel);
@@ -435,7 +435,7 @@ public class MovieBookingGUI extends JFrame {
         billPanel.add(discountField);
         discountFieldList.add(discountField);
         // Discount or enlows for payment
-        JLabel discountLabel1 = new JLabel("Discount for Payment Type: ");
+        JLabel discountLabel1 = new JLabel("Discount for Payment: ");
         discountLabel1.setFont(fontLabel);
         billPanel.add(discountLabel1);
         discountLabelList.add(discountLabel1);
