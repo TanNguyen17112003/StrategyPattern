@@ -1,28 +1,22 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
-        while(true)
-        {
-            Ticket ticket = new Ticket("movie",150000);
-            ticket.printTicket();
-            ticket.listPrice();
-            int a=sc.nextInt();
-            ticket.chooseIDS(a);
-            System.out.println("You will pay the amount of "+ ticket.getPrice());
-            ticket.listPay();
-            a=sc.nextInt();
-            ticket.chooseIPS(a);
-            ticket.completePay();
-            System.out.println("");
-            System.out.println("Press:");
-            System.out.println("0: To exit.");
-            System.out.println("Others: To continue.");
-            sc.nextLine(); // Lấy ký tự trước đó nhập còn sót trong sc.
-            if (sc.nextLine().equals("0")) break;
-            System.out.println("--------------------------------");
-        }
-        sc.close();
+    public static void main(String[] args) {
+        ArrayList<Movie> movieList = new ArrayList<>(3);
+        movieList.add(new Movie("Avengers: Endgame", 1, new Ticket(100000), null));
+        movieList.add(new Movie("Avatar: The Way of Water", 2, new Ticket(125000), null));
+        movieList.add(new Movie("Titanic", 3, new Ticket(95000), null));
+
+        String basePath = System.getProperty("user.dir") + "/src/images/";
+        String path1 = basePath + "avenger.png";
+        String path2 = basePath + "avatar.png";
+        String path3 = basePath + "titanic.png";
+
+        movieList.get(0).setPath(path1);
+        movieList.get(1).setPath(path2);
+        movieList.get(2).setPath(path3);
+
+        MovieBookingGUI movieBookingGUI = new MovieBookingGUI(movieList);
+        movieBookingGUI.createGUI();
     }
 }
