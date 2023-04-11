@@ -14,8 +14,38 @@ public class MovieBookingGUI extends JFrame {
     }
 
     public class reset implements ActionListener {
+        private JTextField name;
+        private ArrayList<JComboBox<String>> fieldBox;
+        private ArrayList<ButtonGroup> buttonGroup;
+        private ArrayList<JLabel> billField;
+        private JLabel selectedMovie;
+
+        reset(JTextField name, ArrayList<JComboBox<String>> fieldBox, ArrayList<ButtonGroup> buttonGroup,
+                ArrayList<JLabel> billField, JLabel selectedMovie) {
+            this.name = name;
+            this.fieldBox = fieldBox;
+            this.buttonGroup = buttonGroup;
+            this.billField = billField;
+            this.selectedMovie = selectedMovie;
+        }
+
         public void actionPerformed(ActionEvent e) {
-            System.out.println("reset");
+            name.setText("");
+            for (JComboBox<String> box : fieldBox) {
+                box.setSelectedIndex(0);
+            }
+            for (ButtonGroup bg : buttonGroup) {
+                bg.clearSelection();
+            }
+            for (Movie movie : movies) {
+                movie.getTicket().setDSPrice(0);
+                movie.getTicket().setPSPrice(0);
+            }
+            int selectedMovie = Integer.parseInt(this.selectedMovie.getText().substring(0, 1)) - 1;
+            billField.get(0).setText(String.valueOf(movies.get(selectedMovie).getTicket().getPrice()));
+            billField.get(1).setText("0.0");
+            billField.get(2).setText("0.0");
+            billField.get(3).setText(billField.get(0).getText());
         }
     }
 
@@ -152,14 +182,14 @@ public class MovieBookingGUI extends JFrame {
         private String selectedText;
         private ArrayList<JLabel> discountField;
         private JComboBox<String> amountBox;
-        private int currentOrder;
+        private JLabel orderLabel;
 
         discountChange(String selectedText, ArrayList<JLabel> discountField, JComboBox<String> amountBox,
-                int currentOrder) {
+                JLabel orderLabel) {
             this.selectedText = selectedText;
             this.discountField = discountField;
             this.amountBox = amountBox;
-            this.currentOrder = currentOrder;
+            this.orderLabel = orderLabel;
         }
 
         public void set(int id, int type) {
@@ -173,6 +203,8 @@ public class MovieBookingGUI extends JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
+            int currentOrder = Integer.parseInt(orderLabel.getText().substring(0, orderLabel.getText().indexOf("/")))
+                    - 1;
             int amount = Integer.parseInt((String) amountBox.getSelectedItem());
             switch (selectedText) {
                 case "Student":
@@ -407,7 +439,7 @@ public class MovieBookingGUI extends JFrame {
                 SpringLayout.EAST, paymentRadioButtonList.get(1));
 
         JPanel billPanel = new JPanel(new GridLayout(4, 2, 200, 20));
-        billPanel.setPreferredSize(new Dimension(700, 180));
+        billPanel.setPreferredSize(new Dimension(480, 180));
         Border billBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
         TitledBorder billTitleBorder = BorderFactory.createTitledBorder(billBorder, "Your Bill",
                 TitledBorder.CENTER, TitledBorder.TOP, fontLabel);
@@ -425,25 +457,16 @@ public class MovieBookingGUI extends JFrame {
 
         ArrayList<JLabel> discountLabelList = new ArrayList<>(2);
         ArrayList<JLabel> discountFieldList = new ArrayList<>(2);
-        // Discount for character
-        JLabel discountLabel = new JLabel("Discount for Character: ");
-        discountLabel.setFont(fontLabel);
-        billPanel.add(discountLabel);
-        discountLabelList.add(discountLabel);
-        JLabel discountField = new JLabel("0");
-        discountField.setFont(fontField);
-        billPanel.add(discountField);
-        discountFieldList.add(discountField);
-        // Discount or enlows for payment
-        JLabel discountLabel1 = new JLabel("Discount for Payment: ");
-        discountLabel1.setFont(fontLabel);
-        billPanel.add(discountLabel1);
-        discountLabelList.add(discountLabel1);
-        JLabel discountField1 = new JLabel("0");
-        discountField1.setFont(fontField);
-        billPanel.add(discountField1);
-        discountFieldList.add(discountField1);
-
+        for (int i = 0; i < 2; i++) {
+            JLabel discountLabel = new JLabel("Discount for: ");
+            discountLabel.setFont(fontLabel);
+            billPanel.add(discountLabel);
+            discountLabelList.add(discountLabel);
+            JLabel discountField = new JLabel("0");
+            discountField.setFont(fontField);
+            billPanel.add(discountField);
+            discountFieldList.add(discountField);
+        }
         JLabel totalLabel = new JLabel("Total: ");
         totalLabel.setFont(fontLabel);
         billPanel.add(totalLabel);
@@ -507,14 +530,24 @@ public class MovieBookingGUI extends JFrame {
         for (int i = 0; i < discountRadioButtonList.size(); i++) {
             discountRadioButtonList.get(i).addActionListener(
                     new discountChange(discountRadioButtonList.get(i).getText(), billLabelList, amountField,
-                            Integer.parseInt(orderLabel.getText().substring(0, 1)) - 1));
+                            orderLabel));
 
         }
         for (int i = 0; i < paymentRadioButtonList.size(); i++) {
             paymentRadioButtonList.get(i).addActionListener(
                     new discountChange(paymentRadioButtonList.get(i).getText(), billLabelList, amountField,
-                            Integer.parseInt(orderLabel.getText().substring(0, 1)) - 1));
+                            orderLabel));
         }
+        ArrayList<ButtonGroup> buttonGroupList = new ArrayList<>(2);
+        buttonGroupList.add(discountButtonGroup);
+        buttonGroupList.add(paymentButtonGroup);
+        ArrayList<JComboBox<String>> comboBoxList = new ArrayList<>(5);
+        comboBoxList.add(dateField);
+        comboBoxList.add(monthField);
+        comboBoxList.add(timeField);
+        comboBoxList.add(amountField);
+        comboBoxList.add(roomField);
+        resetButton.addActionListener(new reset(nameField, comboBoxList, buttonGroupList, billLabelList, orderLabel));
         mainFrame.add(panel);
         mainFrame.setVisible(true);
     }
